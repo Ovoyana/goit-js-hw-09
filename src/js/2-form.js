@@ -1,11 +1,11 @@
 'use strict';
 
-const Storage_Key = 'feedback-form-state';
+const storageKey = 'feedback-form-state';
 const feedbackForm = document.querySelector('.feedback-form');
 
 //Створюємо ф-цію для вичитування та повернення об"єкту з усією інформацією
 
-function readFormData(feedbackForm){
+function readFormData(){
     const message = feedbackForm.message.value.trim();
     const useremail = feedbackForm.email.value.trim();
     return {
@@ -24,18 +24,19 @@ feedbackForm.addEventListener('input', (event) => {
 
     //Збереження введених даних у локальне сховище
 
-    localStorage.setItem(Storage_Key, jsonData);
+    localStorage.setItem(storageKey, jsonData);
 })
 //Перевіряємо сховище при завантаженні сторінки
 
-const rawData = localStorage.getItem(Storage_Key);
+const rawData = localStorage.getItem(storageKey);
 if (rawData){
     const data = JSON.parse(rawData);
 
 //Перевіряємо на існування значення
-    if (data.useremail &&  data.message) {
-        feedbackForm.email.value = data.useremail;
-        feedbackForm.message.value = data.message;
+    if (data) {
+        feedbackForm.email.value = data.useremail || "";
+        feedbackForm.message.value = data.message || "";
+
     }
 
 }
@@ -58,7 +59,7 @@ if (rawData){
         });
     }
     // Очищуємо сховище та поля форми
-    localStorage.removeItem(Storage_Key);
+    localStorage.removeItem(storageKey);
     feedbackForm.reset()
     
       });

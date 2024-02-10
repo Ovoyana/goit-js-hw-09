@@ -5,7 +5,7 @@ import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 // import { loadEnv } from "vite";
 
-const lightbox = new SimpleLightbox('.gallery a', { /* options */ });
+
 
 console.log(SimpleLightbox);
 
@@ -106,9 +106,9 @@ function createGalleryMarkup(images) {
 
 console.log(createGalleryMarkup(images));
 
-let modal;
 
-modal = new SimpleLightbox('.gallery-link', {
+
+const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 250,
   });
